@@ -1,4 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+
+import CheckMark from '../components/CheckMark';
+
+const propTypes = {
+  handleClickOnList: PropTypes.func.isRequired,
+  domain: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
 
 class ListItem extends Component {
   constructor() {
@@ -7,7 +16,6 @@ class ListItem extends Component {
   }
   handleClick() {
     const { handleClickOnList, id } = this.props;
-    console.log('handleclick id', id);
     handleClickOnList(id);
   }
   render() {
@@ -15,11 +23,13 @@ class ListItem extends Component {
     return (
       <tr onClick={this.handleClick}>
         <td>{domain}</td>
-        <td>{/\.com$|\.lol$/.test(domain) ? (<i className="fa fa-check" aria-hidden="true" />) : ''}</td>
+        <CheckMark domain={domain} />
         <td>{price}</td>
       </tr>
     );
   }
 }
+
+ListItem.propTypes = propTypes;
 
 export default ListItem;
