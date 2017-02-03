@@ -39,10 +39,9 @@ class Lists extends Component {
       <Table stripped condensed hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Domain Name</th>
+            <th>Uniregistry</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
