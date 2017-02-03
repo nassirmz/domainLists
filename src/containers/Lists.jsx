@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getLists } from '../actions';
+import { startGetLists } from '../actions';
 
 // props validation using airbnb's  style guide
 const propTypes = {
@@ -15,7 +15,7 @@ class Lists extends Component {
     const { dispatch } = this.props;
 
     // dispatch action creator with dummy data
-    dispatch(getLists(['list1', 'list2']));
+    dispatch(startGetLists());
   }
 
   render() {
