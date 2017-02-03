@@ -1,9 +1,11 @@
 module.exports = {
   entry: './src/index.jsx',
+
   output: {
     path: __dirname,
     filename: '/public/bundle.js',
   },
+
   module: {
     loaders: [
       {
@@ -13,7 +15,10 @@ module.exports = {
         },
         test: /\.jsx$/,
         exclude: [/node_modules/],
-      }
-    ]
-  }
-}
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+};
