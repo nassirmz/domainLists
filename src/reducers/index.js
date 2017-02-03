@@ -3,7 +3,6 @@ import { GET_LISTS, SET_DETAIL, GET_LIST_DETAIL, UNSET_DETAIL } from '../constan
 // reducer that returns new state based on the action type
 
 export function listsReducer(state = [], action) {
-  console.log(state, 'state');
   switch (action.type) {
     case GET_LISTS:
       return action.lists;

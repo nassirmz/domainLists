@@ -20,7 +20,6 @@ app.get('/domains', (req, res) => {
 
 app.get('/domains/:id', (req, res) => {
   const id = req.params.id;
-  console.log(id);
   res.sendFile(path.join(__dirname, `../${id}.json`));
 });
 

@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Form, FormGroup, Button, Col, ControlLabel, FormControl } from 'react-bootstrap';
+
+const propTypes = {
+  handleSubmitListDetail: PropTypes.func.isRequired,
+  domain: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  registrant_email: PropTypes.string.isRequired,
+};
 
 class ListDetail extends Component {
   constructor() {
@@ -21,7 +28,7 @@ class ListDetail extends Component {
             Domain Name
           </Col>
           <Col sm={8}>
-            <FormControl value={domain}/>
+            <FormControl value={domain} />
           </Col>
         </FormGroup>
 
@@ -30,7 +37,7 @@ class ListDetail extends Component {
             Registration Email
           </Col>
           <Col sm={8}>
-            <FormControl value={registrant_email}/>
+            <FormControl value={registrant_email} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -38,7 +45,7 @@ class ListDetail extends Component {
             Price
           </Col>
           <Col sm={8}>
-            <FormControl value={price}/>
+            <FormControl value={price} />
           </Col>
         </FormGroup>
 
@@ -53,5 +60,7 @@ class ListDetail extends Component {
     );
   }
 }
+
+ListDetail.propTypes = propTypes;
 
 export default ListDetail;

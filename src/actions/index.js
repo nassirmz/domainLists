@@ -34,7 +34,6 @@ export function startGetLists() {
   return (dispatch) => {
     axios.get('/domains')
       .then((resp) => {
-        console.log(resp.data.domains, 'domains');
         dispatch(getLists(resp.data.domains));
       })
       .catch((error) => {
@@ -47,7 +46,6 @@ export function starGetListDetail(id) {
   return (dispatch) => {
     axios.get(`/domains/${id}`)
       .then((resp) => {
-        console.log(resp.data, 'DETAIL LISTS');
         dispatch(getListDetail(resp.data));
         dispatch(setDetail());
       })
