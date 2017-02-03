@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 
-//get express app
+// get express app
 const app = express();
 const port = process.env.PORT || 4568;
 
@@ -13,6 +13,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../public')));
 
-app.listen(port, function () {
+// routes
+app.route('/domains')
+  .get((req, res) => {
+    console.log(req.params.id);
+    res.sendFile(path.join(__dirname, '/../domains.json'));
+  });
+
+app.listen(port, () => {
   console.log('Listenening on port', port);
-})
+});
