@@ -1,11 +1,33 @@
-import { GET_LISTS } from '../constants/index';
+import { GET_LISTS, SET_DETAIL, GET_LIST_DETAIL, UNSET_DETAIL } from '../constants';
 
 // reducer that returns new state based on the action type
-export function listsReducer(state, action) {
+
+export function listsReducer(state = [], action) {
+  console.log(state, 'state');
   switch (action.type) {
     case GET_LISTS:
       return action.lists;
     default:
-      return [];
+      return state;
+  }
+}
+
+export function listDetailReducer(state = {}, action) {
+  switch (action.type) {
+    case GET_LIST_DETAIL:
+      return action.listDetail;
+    default:
+      return state;
+  }
+}
+
+export function isDetailReducer(state = false, action) {
+  switch (action.type) {
+    case SET_DETAIL:
+      return true;
+    case UNSET_DETAIL:
+      return false;
+    default:
+      return state;
   }
 }
