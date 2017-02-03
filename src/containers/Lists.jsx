@@ -1,14 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'react-bootstrap';
+import { Table, Col } from 'react-bootstrap';
 
-import { startGetLists } from '../actions';
-import ListItem from '../components/ListItem';
+import { startGetLists, starGetListDetail, unsetDetail } from '../actions';
+import ListItem from './ListItem';
+import ListDetail from './ListDetail';
 
 // props validation using airbnb's  style guide
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   lists: PropTypes.array.isRequired,
+  isDetailAvailable: PropTypes.bool.isRequired,
 };
 
 // smart containers that handles logic and provides data
@@ -16,6 +18,8 @@ class Lists extends Component {
   constructor() {
     super();
     this.renderLists = this.renderLists.bind(this);
+    this.handleClickOnList = this.handleClickOnList.bind(this);
+    this.handleSubmitListDetail = this.handleSubmitListDetail.bind(this);
   }
 
   componentDidMount() {
@@ -25,18 +29,20 @@ class Lists extends Component {
     dispatch(startGetLists());
   }
 
-  renderLists() {
-    const { lists } = this.props;
-    return lists.map((list) => {
-      return (
-        <ListItem {...list} key={list.id} />
-      );
-    });
+  handleClickOnList(id) {
+    const { dispatch } = this.props;
+    dispatch(starGetListDetail(id));
   }
 
-  render() {
+  handleSubmitListDetail() {
+    const { dispatch } = this.props;
+    dispatch(unsetDetail());
+  }
+
+  renderLists() {
+    const { lists } = this.props;
     return (
-      <Table stripped condensed hover>
+      <Table condensed hover>
         <thead>
           <tr>
             <th>Domain Name</th>
@@ -45,9 +51,30 @@ class Lists extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.renderLists()}
+          {lists.map((list) => {
+            return (
+              <ListItem {...list} key={list.id} handleClickOnList={this.handleClickOnList} />
+            );
+          })}
         </tbody>
       </Table>
+    );
+  }
+
+  renderIndiviualList () {
+    const { listDetail } = this.props;
+    return (
+      <ListDetail {...listDetail} handleSubmitListDetail={this.handleSubmitListDetail} />
+    );
+  }
+
+  render() {
+    const { isDetailAvailable } = this.props;
+    console.log(isDetailAvailable);
+    return (
+      <Col>
+        {isDetailAvailable ? this.renderIndiviualList() : this.renderLists()}
+      </Col>
     );
   }
 }
@@ -56,6 +83,8 @@ class Lists extends Component {
 function mapStateToProps(state) {
   return {
     lists: state.lists,
+    isDetailAvailable: state.isDetailAvailable,
+    listDetail: state.listDetail,
   };
 }
 
