@@ -6,6 +6,10 @@ module.exports = {
     filename: '/public/bundle.js',
   },
 
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+
   module: {
     loaders: [
       {
@@ -16,9 +20,10 @@ module.exports = {
         test: /\.jsx$/,
         exclude: [/node_modules/],
       },
+      {
+        loader: 'style!css',
+        test: /\.css?$/,
+      },
     ],
-  },
-  resolve: {
-    extensions: ['.js', '.jsx'],
   },
 };
