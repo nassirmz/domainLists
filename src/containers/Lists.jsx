@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Table } from 'react-bootstrap';
 
 import { startGetLists } from '../actions';
+import ListItem from '../components/ListItem';
 
 // props validation using airbnb's  style guide
 const propTypes = {
@@ -11,6 +13,11 @@ const propTypes = {
 
 // smart containers that handles logic and provides data
 class Lists extends Component {
+  constructor() {
+    super();
+    this.renderLists = this.renderLists.bind(this);
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
 
@@ -18,10 +25,30 @@ class Lists extends Component {
     dispatch(startGetLists());
   }
 
-  render() {
+  renderLists() {
     const { lists } = this.props;
+    return lists.map((list) => {
+      return (
+        <ListItem {...list} key={list.id} />
+      );
+    });
+  }
+
+  render() {
     return (
-      <div>{JSON.stringify(lists)}</div>
+      <Table stripped condensed hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderLists()}
+        </tbody>
+      </Table>
     );
   }
 }
