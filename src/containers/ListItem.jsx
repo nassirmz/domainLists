@@ -5,7 +5,7 @@ import CheckMark from '../components/CheckMark';
 const propTypes = {
   handleClickOnList: PropTypes.func.isRequired,
   domain: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
 };
 

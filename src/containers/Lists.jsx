@@ -5,12 +5,14 @@ import { Table, Col } from 'react-bootstrap';
 import { startGetLists, starGetListDetail, unsetDetail } from '../actions';
 import ListItem from './ListItem';
 import ListDetail from './ListDetail';
+import TableHead from '../components/TableHead';
 
 // props validation using airbnb's  style guide
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   lists: PropTypes.array.isRequired,
   isDetailAvailable: PropTypes.bool.isRequired,
+  listDetail: PropTypes.object.isRequired,
 };
 
 // smart containers that handles logic and provides data
@@ -43,13 +45,7 @@ class Lists extends Component {
     const { lists } = this.props;
     return (
       <Table condensed hover>
-        <thead>
-          <tr>
-            <th>Domain Name</th>
-            <th>Uniregistry</th>
-            <th>Price</th>
-          </tr>
-        </thead>
+        <TableHead />
         <tbody>
           {lists.map((list) => {
             return (
@@ -61,7 +57,7 @@ class Lists extends Component {
     );
   }
 
-  renderIndiviualList () {
+  renderIndiviualList() {
     const { listDetail } = this.props;
     return (
       <ListDetail {...listDetail} handleSubmitListDetail={this.handleSubmitListDetail} />
@@ -70,7 +66,6 @@ class Lists extends Component {
 
   render() {
     const { isDetailAvailable } = this.props;
-    console.log(isDetailAvailable);
     return (
       <Col>
         {isDetailAvailable ? this.renderIndiviualList() : this.renderLists()}
