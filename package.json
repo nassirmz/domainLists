@@ -2,10 +2,14 @@
   "name": "domainlists",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "src/index.jsx",
   "scripts": {
+    "start": "node ./server/index.js",
     "lint": "eslint src",
     "test": "mocha --compilers js:babel-core/register \"test/**/*@(.js|.jsx)\""
+  },
+  "engines": {
+    "node": "6.9.2"
   },
   "author": "",
   "license": "ISC",

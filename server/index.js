@@ -14,11 +14,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../public')));
 
 // routes
-app.route('/domains')
-  .get((req, res) => {
-    console.log(req.params.id);
-    res.sendFile(path.join(__dirname, '/../domains.json'));
-  });
+app.get('/domains', (req, res) => {
+  res.sendFile(path.join(__dirname, '../domains.json'));
+});
+
+app.get('/domains/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  res.sendFile(path.join(__dirname, `../${id}.json`));
+});
 
 app.listen(port, () => {
   console.log('Listenening on port', port);
